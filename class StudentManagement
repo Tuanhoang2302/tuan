@@ -1,0 +1,105 @@
+public class StudentManagement {
+    Student[] arr = new Student[100];
+    int number_of_students = 0;
+
+    public static boolean sameGroup(Student s1, Student s2) {
+        if(s1.getGroup() == s2.getGroup()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public void addStudent(Student newStudent) {
+        arr[number_of_students] = newStudent;
+        number_of_students++;
+    }
+
+    public String studentsByGroup() {
+        Student[] copy_arr = new Student[100];
+        String[] name_group = new String[100];
+        int[] chi_so = new int[100];
+
+        for(int i = 0; i < number_of_students; i++) {
+            chi_so[i] = 0;
+        }
+
+        int dem_arr = 0;
+        int dem_group = 0;
+        copy_arr[dem_arr] = arr[0];
+        name_group[dem_group] = arr[0].getGroup();
+        dem_arr++;
+        dem_group++;
+
+        for(int i = 1; i < number_of_students; i++) {
+            if(arr[i].getGroup() == arr[0].getGroup()) {
+                chi_so[i] = 1;
+                copy_arr[dem_arr] = arr[i];
+                dem_arr++;
+            }
+        }
+
+        for(int i = 1; i < number_of_students; i++) {
+            if(chi_so[i] == 1) {
+                continue;
+            }
+            else {
+                copy_arr[dem_arr] = arr[i];
+                dem_arr++;
+                name_group[dem_group] = arr[i].getGroup();
+                dem_group++;
+                for(int j =  i + 1; j < number_of_students; j++) {
+                    if(arr[j].getGroup() == arr[i].getGroup()) {
+                        chi_so[j] = 1;
+                        copy_arr[dem_arr] = arr[j];
+                        dem_arr++;
+                    }
+                }
+            }
+        }
+
+        String res = "";
+        dem_arr = 0;
+        for(int i = 0; i < dem_group; i++) {
+            res = res + name_group[i] + '\n';
+            while ((dem_arr < number_of_students) && (copy_arr[dem_arr].getGroup() == name_group[i])) {
+                res = res + copy_arr[dem_arr].getInfo();
+                dem_arr++;
+            }
+        }
+
+        return res;
+    }
+
+    public void removeStudent(String id){
+        for(int i = 0; i < number_of_students; i++){
+            if(arr[i].getId() == id) {
+                //System.out.println(arr[i].getId());
+                for (int j = i; j < number_of_students; j++) {
+                    arr[j] = arr[j + 1];
+                }
+                number_of_students--;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Student std1 = new Student();
+        Student std2 = new Student("fsa", "54432", "ga.gmail");
+        Student std3 = new Student("rew", "rwe", "rtr.gmail");
+        Student std4 = new Student(std2);
+
+        StudentManagement SM = new StudentManagement();
+
+        SM.addStudent(std1);
+        SM.addStudent(std2);
+        SM.addStudent(std3);
+        SM.addStudent(std4);
+
+        //SM.removeStudent("54432");
+        String res = SM.studentsByGroup();
+        System.out.println(res);
+
+    }
+}
