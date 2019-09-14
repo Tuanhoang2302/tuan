@@ -11,7 +11,7 @@ public class Student {
     public void setId(String I) {this._id = I;}
 
     public String getGroup() {return _group;}
-    public void setGroup(String G)
+    public void setGroup(String G) {this._group = _group;}
 
     public String getEmail() {return email;}
     public void setEmail(String E) {this.email = E;}
