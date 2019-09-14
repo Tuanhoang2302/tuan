@@ -1,0 +1,46 @@
+public class Student {
+    private String _name;
+    private String _id;
+    private String _group;
+    private String email;
+
+    public String getName() {return _name;}
+    public void setName(String N) {this._name  = N;}
+
+    public String getId() {return _id;}
+    public void setId(String I) {this._id = I;}
+
+    public String getGroup() {return _group;}
+    public void setGroup(String G)
+
+    public String getEmail() {return email;}
+    public void setEmail(String E) {this.email = E;}
+
+    public String getInfo() {
+        String result = "";
+        result += _name + " - " + _id + " - " + _group + " - " + email + '\n';
+        return result;
+    }
+
+    Student(){
+        this._name = "Student";
+        this._id = "000";
+        this._group = "K62CB";
+        this.email = "uet@vnu.edu.vn";
+    }
+
+    Student(String name, String id, String email){
+        this._name = name;
+        this._id = id;
+        this.email = email;
+        this._group = "K62CB";
+    }
+
+    Student(Student S){
+        this._name = S._name;
+        this._id = S._id;
+        this._group = S._group;
+        this.email = S.email;
+    }
+
+}
